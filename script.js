@@ -1,33 +1,46 @@
 const DEFAULT_SIZE = 16;
 const DEFAULT_COLOR = '#000000'
-const DEFAULT_MODE = 'color';
+
 
 let currentSize = DEFAULT_SIZE;
 let currentColor = DEFAULT_COLOR;
-let currentMode = DEFAULT_MODE;
+
 
 function setCurrentSize(newSize) {
         currentSize = newSize
-      }
+      };
+
+function setCurrentColor(newColor) {
+        currentColor = newColor
+};
 
 const divContainer = document.querySelector('#container');
 const log = console.log;
 const clearBtn = document.querySelector('#clearBtn');
 const changeBtn = document.querySelector('#popBTN');
+const colorPicker = document.querySelector('#colorPicker');
 
 
 clearBtn.onclick = () => clearAll();
 changeBtn.onclick = () => changeSize();
+colorPicker.onchange = (e) => setCurrentColor(e.target.value)
+
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
 
 function getGrid(size) {
- divContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
- divContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
- for (let i=1; i<=size*size; i++) {
- let divBoxes = document.createElement('div');
- divBoxes.className = 'boxes';
- divBoxes.style.border = '1px solid';
- divContainer.appendChild(divBoxes);
- };
+        divContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        divContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+        for (let i=1; i<=size*size; i++) {
+        let divBoxes = document.createElement('div');
+        divBoxes.className = 'boxes';
+        divBoxes.addEventListener('mousedown', changeColor)
+        divBoxes.addEventListener('mouseover', changeColor)
+        divContainer.appendChild(divBoxes);
+        };
 };
 
 function clearContainer() {
@@ -37,7 +50,6 @@ function clearContainer() {
 function reloadGrid () {
         clearContainer();
         getGrid(currentSize);
-        paint();
 }
 function changeSize() {
  let sizeValue = prompt('Write a Number between 1 and 100');
@@ -50,21 +62,12 @@ function changeSize() {
  }
 };
 
-function paint () {
- const box = document.querySelectorAll('.boxes');
-  box.forEach((box) => {
-  box.addEventListener('click', function() {
-   if (box.style.backgroundColor == ''){
-      box.style.backgroundColor = 'black';
+function changeColor (e) {
+        if (e.type === 'mouseover' && !mouseDown) return
+         e.target.style.backgroundColor = currentColor;
    }
-   else if (box.style.backgroundColor == 'black') {
-           box.style.backgroundColor = ''
-   }
-   })
- })
- };
-        
-        
+
+
 
 function clearAll () {
         const box = document.querySelectorAll('.boxes');
@@ -73,5 +76,4 @@ function clearAll () {
 
 window.onload = () => {
         getGrid(DEFAULT_SIZE);
-        paint();
 }

@@ -8,11 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="clearBtn" class='btn'>Clear</button>
-    <button id="popBTN" class='btn'>Change Size</button>
 
-    <div id = "container">
+    <header>
+        <h1 class="title">ETCH-A-SKETCH</h1>
+    </header>
+    <main class="main">
+        <div id="buttonsCont">
+                <button id="clearBtn" class='btn'>Clear</button>
+                <button id="popBTN" class='btn'>Change Size</button>
+                <input id="colorPicker" type="color" ></input>
+                <label>Change Color</label>
+        </div>
+    <div id= "paint">
+        <div id = "container"></div>
     </div>
+</main>
+
+<footer>
+    <p>Copyright © 2022 Terraz</p>
+</footer>
     <script src="script.js"></script>
 </body>
 </html>

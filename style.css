@@ -1,13 +1,48 @@
 body {
     height: 100vh;
-    width: 100vh;
     box-sizing: border-box;
+    background-color: #0F2731;
+    color: #FFFFFF;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    height: 100px;
+}
+
+.main {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+#buttonsCont {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #container {
-    height: 100vw;
-    width: 100vw;
+    background-color: #FFFFFF;
+    height: 500px;
+    width: 500px;
     display: grid;
+    border: 1px dashed;
+}
+input {
+    align-self: center;
+}
+footer {
+    display: flex;
+    justify-content: center;
 }
 
 .btn {
