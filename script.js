@@ -29,7 +29,7 @@ colorPicker.onchange = (e) => setCurrentColor(e.target.value)
 let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false)
-
+document.body.ondragstart = () => (ondragstart = false)
 
 function getGrid(size) {
         divContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
