@@ -1,10 +1,11 @@
 const DEFAULT_SIZE = 16;
 const DEFAULT_COLOR = '#000000'
+const DEFAULT_MODE = 'color'
 
 
 let currentSize = DEFAULT_SIZE;
 let currentColor = DEFAULT_COLOR;
-
+let currentMode = DEFAULT_MODE;
 
 function setCurrentSize(newSize) {
         currentSize = newSize
@@ -14,13 +15,19 @@ function setCurrentColor(newColor) {
         currentColor = newColor
 };
 
+function setCurrentMode(newMode) {
+        currentMode = newMode;
+};
+
 const divContainer = document.querySelector('#container');
 const log = console.log;
 const clearBtn = document.querySelector('#clearBtn');
 const changeBtn = document.querySelector('#popBTN');
 const colorPicker = document.querySelector('#colorPicker');
+const eraserBtn = document.querySelector('#eraserBTN');
 
 
+eraserBtn.onclick = () => changeMode();
 clearBtn.onclick = () => clearAll();
 changeBtn.onclick = () => changeSize();
 colorPicker.onchange = (e) => setCurrentColor(e.target.value)
@@ -62,9 +69,22 @@ function changeSize() {
  }
 };
 
+function changeMode() {
+        if (currentMode === 'color') {
+                eraserBtn.textContent = 'Pencil';
+        setCurrentMode('eraser');
+        }
+        else if (currentMode === 'eraser') {
+                eraserBtn.textContent = 'Eraser';
+                setCurrentMode('color');
+        }
+}
+
+
 function changeColor (e) {
         if (e.type === 'mouseover' && !mouseDown) return
-         e.target.style.backgroundColor = currentColor;
+        if (currentMode === 'color') {e.target.style.backgroundColor = currentColor}
+        else if (currentMode === 'eraser') {e.target.style.backgroundColor = ''};
    }
 
 
